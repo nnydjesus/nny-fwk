@@ -1,0 +1,47 @@
+<configuration>
+
+    <section name="enviroment">
+        <entry key="mac.address" value="00:13:D4:D0:86:12"/>
+        <entry key="working.directory" value="src/dev/local"/>
+        <entry key="webapp.directory" value="src/main/webapp"/>
+
+        <entry key="exception.syserr.logging" value="true"/>
+        <entry key="initializer.on" value="true"/>
+
+        <entry key="deny.remote.services" value="false"/>
+        <entry key="allow.anonymous.users" value="false"/>
+    </section>
+
+    <section name="hibernate">
+        <entry key="alternateSessionFactories" value=""/>
+        <entry key="ddl.recreateSchema" value="true"/>
+
+        <entry key="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        <entry key="hibernate.connection.url" value="jdbc:mysql://localhost:3306/test"/>
+        <entry key="hibernate.connection.username" value="root"/>
+        <entry key="hibernate.connection.password" value="root"/>
+        <entry key="hibernate.connection.pool_size" value="5"/>
+        <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+
+        <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+        <entry key="hibernate.cache.use_query_cache" value="true"/>
+
+        <entry key="hibernate.format_sql" value="false"/>
+        <entry key="hibernate.show_sql" value="true"/>
+
+        <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+        <entry key="hibernate.jdbc.use_streams_for_binary" value="true"/>
+        <entry key="hibernate.max_fetch_depth" value="10"/>
+        <entry key="hibernate.jdbc.batch_size" value="20"/>
+        <entry key="hibernate.jdbc.fetch_size" value="10"/>
+
+        <entry key="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+
+    </section>
+    
+    <section name="modules">
+  		<entry key="package.prefix" value="ar.com.syr" /> 
+ 		<entry key="list" value="trasportes" /> 
+ 	</section>
+  
+</configuration>
