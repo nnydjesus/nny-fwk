@@ -1,0 +1,132 @@
+
+ <html lang="es"> <head> <meta content="text/html; charset=utf-8" http-equiv="Content-Type"> <style type="text/css"> 
+body, td{font-family:arial,sans-serif;font-size:80%} a:link, a:active, a:visited{color:#0000CC} img{border:0} pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; white-space: pre-wrap; word-wrap: break-word; width: 800px; overflow: auto;}
+</style> <script> 
+<!--function Print(){document.body.offsetHeight;window.print()};-->
+</script> </head> <body onload="Print()"> 
+<div marginwidth="0" marginheight="0" link="#003366" vlink="#003366" alink="#660000"> 
+<table cellpadding="0" cellspacing="0" border="0" width="100%"> 
+<tr> 
+<td width="170" bgcolor="#f0f0f0" valign="top"> 
+<table cellpadding="0" cellspacing="0" border="0" width="100%"> 
+<tr> 
+<td> 
+<table cellpadding="3" cellspacing="0" style="border-top-style:none;border-right-style:none;border-bottom-style:solid;border-left-style:none;border-width:1px;border-color:#3c78b5" width="100%"> 
+<tr> 
+<td style="background-color:#ddd"> 
+<b>Issue</b> 
+(<b><a href="http://saraza!!!!" target="_blank">Inventa</a></b>)<br> 
+</td> 
+</tr> 
+</table> 
+<table cellpadding="3" cellspacing="0" border="0" width="100%"> 
+<tr style="vertical-align:top"> 
+<td style="width:1%;white-space:nowrap"><b>Key:</b></td> 
+<td style="font-weight:bold;width:99%"><a href="http://otra.sasa" target="_blank">nombre del proyeto</a></td> 
+</tr> 
+<tr style="vertical-align:top"> 
+<td style="font-weight:bold">tipo:</td> 
+<td> 
+<a href="http://mas.sasa" target="_blank"><img src="http://jira.mindset-studio.net/images/icons/bug.gif" height="16" width="16" border="0" align="absmiddle" alt="Bug"></a> 
+tipo
+</td> 
+</tr> 
+<tr style="vertical-align:top"> 
+<td style="font-weight:bold;white-space:nowrap">Status:</td> 
+<td> 
+<img src="http://jira.mindset-studio.net/images/icons/status_open.gif" height="16" width="16" border="0" align="absmiddle" alt="Open"> stado
+</td> 
+</tr> 
+<tr style="vertical-align:top"> 
+<td style="font-weight:bold;white-space:nowrap">Priority:</td> 
+<td> 
+<img src="http://jira.mindset-studio.net/images/icons/priority_blocker.gif" height="16" width="16" border="0" align="absmiddle" alt="Blocker"> No hay drama
+</td> 
+</tr> 
+<tr style="vertical-align:top"> 
+<td style="font-weight:bold;white-space:nowrap">Assignee:</td> 
+<td> 
+<a rel="ronny" href="http://me" target="_blank">me</a> 
+</td> 
+</tr> 
+<tr style="vertical-align:top"> 
+<td style="font-weight:bold;white-space:nowrap">Reporter:</td> 
+<td> 
+<a rel="pablo" href="http:me" target="_blank">me</a> 
+</td> 
+</tr> 
+</table> 
+<br> 
+<table cellpadding="3" cellspacing="0" style="border-top-style:none;border-right-style:none;border-bottom-style:solid;border-left-style:none;border-width:1px;border-color:#3c78b5" width="100%"> 
+<tr> 
+<td style="background-color:#dddddd;font-weight:bold"> 
+Operations </td> 
+</tr> 
+</table> 
+<table cellpadding="3" cellspacing="0" style="border:0;width:100%"> 
+<tr> 
+<td> 
+<img src="http://jira.mindset-studio.net/images/icons/bullet_creme.gif" height="8" width="8" border="0" align="absmiddle" alt=""> 
+ <b>View <a href="http://nose" target="_blank">nose</a></b> 
+</td> 
+</tr> 
+<tr> 
+<td> 
+<img src="http://jira.mindset-studio.net/images/icons/bullet_creme.gif" height="8" width="8" border="0" align="absmiddle" alt=""> 
+ <b>View <a href="http://ni.idea" target="_blank">comments</a></b> 
+</td> 
+</tr> 
+<tr> 
+<td> 
+<img src="http://jira.mindset-studio.net/images/icons/bullet_creme.gif" height="8" width="8" border="0" align="absmiddle" alt=""> 
+ <b>View <a href="mas.mas" target="_blank">history</a></b> 
+</td> 
+</tr> 
+</table> 
+</td> 
+</tr> 
+</table> 
+</td> 
+<td bgcolor="#ffffff" valign="top"> 
+<table width="100%" cellpadding="10" cellspacing="0" border="0"> 
+<tr> 
+<td> 
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#bbbbbb" width="100%" align="center"> 
+<tr> 
+<td> 
+<table cellpadding="4" cellspacing="0" style="background-color:#fff;border:0;width:100%"> 
+<tr> 
+<td style="background-color:#f0f0f0;width:100%;vertical-align:top"> 
+<b><font size="4" color="#003366"><a href="http://link" target="_blank">Este es un mail de prueba que estoy inventando... espero que me salga bien
+<br> 
+<font size="1"> 
+Updated: <font color="#336699">fecha</font> 
+ 
+Created: <font color="#336699">fecha</font> 
+ 
+</font> 
+</td> 
+</tr> 
+</table> 
+</td> 
+</tr> 
+</table> 
+<br> 
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#bbbbbb" width="100%" align="center"><tr><td> 
+<table cellpadding="4" cellspacing="0" border="0" width="100%" bgcolor="#ffffff"> 
+<tr> 
+<td width="20%"><b>Project:</b></td> 
+<td width="80%"><a href="http://url" target="_blank">my-proyect</a></td> 
+</tr> 
+<tr> 
+<td><b>Versions:</b></td> 
+<td> 
+0.0.0-SNAPSHOT </td> 
+</tr> 
+</table> 
+</td></tr></table> 
+</td></tr></table> 
+</td></tr></table> 
+</p> 
+</div> 
+</font> </table> </table> <hr> </body> </html> 
