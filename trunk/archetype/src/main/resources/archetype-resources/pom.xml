@@ -10,16 +10,11 @@
 		<artifactId>parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<name>${artifactId}</name>
 	<url>http://maven.apache.org</url>
-	
-	<scm>
-		<connection>scm:svn:https://nny-fwk.googlecode.com/svn/trunk/base/</connection>
-		<url>https://nny-fwk.googlecode.com/svn/trunk/</url>
-	</scm>
-	
-	
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -43,6 +38,6 @@
 			<artifactId>collections-generic</artifactId>
 			<version>4.01</version>
 		</dependency>
-		
+
 	</dependencies>
 </project>
