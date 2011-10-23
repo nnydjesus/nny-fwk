@@ -1,0 +1,108 @@
+<configuration>
+
+    <section name="enviroment">
+        <entry key="mac.address" value="00:13:D4:D0:86:12"/>
+        <entry key="working.directory" value="work/base"/>
+        <entry key="webapp.directory" value="work/base"/>
+
+        <entry key="exception.syserr.logging" value="true"/>
+        <entry key="initializer.on" value="true"/>
+
+        <entry key="deny.remote.services" value="false"/>
+        <entry key="allow.anonymous.users" value="true"/>
+    </section>
+
+    <section name="webhostResolver">
+	</section>
+	
+	<section name="secureServices">
+	</section>
+
+    <section name="hibernate">
+        <entry key="alternateSessionFactories" value=""/>
+        <entry key="ddl.recreateSchema" value="true"/>
+
+        <entry key="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        <entry key="hibernate.connection.url" value="jdbc:mysql://localhost:3306/test"/>
+        <entry key="hibernate.connection.username" value="root"/>
+        <entry key="hibernate.connection.password" value="root"/>
+        <entry key="hibernate.connection.pool_size" value="5"/>
+        <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialec"/>
+
+        <entry key="hibernate.cache.provider_class" value="org.hibernate.connection.ConnectionProvider"/>
+        <entry key="hibernate.cache.use_query_cache" value="true"/>
+
+        <entry key="hibernate.format_sql" value="false"/>
+        <entry key="hibernate.show_sql" value="false"/>
+
+        <entry key="hibernate.connection.provider_class" value="org.hibernate.connection.ConnectionProvider"/>
+
+        <entry key="hibernate.c3p0.acquire_increment" value="2"/>
+        <entry key="hibernate.c3p0.idle_test_period" value="20"/>
+
+        <entry key="hibernate.c3p0.max_size" value="30"/>
+        <entry key="hibernate.c3p0.max_statements" value="0"/>
+        <entry key="hibernate.c3p0.min_size" value="10"/>
+        <entry key="hibernate.c3p0.timeout" value="60"/>
+
+        <entry key="hibernate.c3p0.automatic_test_table" value="industry"/>
+        <entry key="hibernate.c3p0.idle_connection_test_period" value="20"/>
+
+        <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+        <entry key="hibernate.jdbc.use_streams_for_binary" value="true"/>
+        <entry key="hibernate.max_fetch_depth" value="10"/>
+        <entry key="hibernate.jdbc.batch_size" value="20"/>
+        <entry key="hibernate.jdbc.fetch_size" value="10"/>
+
+        <entry key="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+        <entry key="hibernate.search.analyzer" value="ar.com.mindset.flexy.lucene.SpanishAnalyzer"/>
+
+    </section>
+
+    <!--  section name="hibernate.alternateSessionFactory">
+        Equals to another session factory configuration
+    </section-->
+
+    <section name="modules">
+        <entry key="package.prefix" value="ar.com.syr.transporte"/>
+    </section>
+
+    <section name="pagination">
+        <entry key="MAX_RESULT_PAGE" value="6"/>
+    </section>
+
+    <section name="flex">
+        <entry key="retainExceptionStackTrace" value="true"/>
+    </section>
+
+    <section name="webservice">
+        <entry key="attachment.directory" value="attachments"/>
+        <entry key="attachment.outboundThreshold" value="5000000"/>
+        <entry key="attachment.inboundThreshold" value="5000000"/>
+    </section>
+
+    <section name="mailing">
+        <entry key="user" value="nny.fwk@gmail.com"/>
+        <entry key="password" value="sarasaza"/>
+        <entry key="activated" value="true"/>
+        <entry key="disabledAccount" value="nny.fwk@gmail.com"/>
+        <entry key="from.defaultAddress" value="nny.fwk@gmail.com"/>
+        <entry key="from.defaultSender" value="NNY"/>
+        <entry key="mail.smtp.host" value="smtp.gmail.com"/>
+        <entry key="mail.smtp.auth" value="true"/>
+        <entry key="mail.debug" value="true"/>
+        <entry key="mail.smtp.port" value="465"/>
+        <entry key="mail.smtp.socketFactory.port" value="465"/>
+        <entry key="mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory"/>
+        <entry key="mail.smtp.socketFactory.fallback" value="false"/>
+    </section>
+    
+   	<section name="attachments">
+	</section>
+    
+    <section name="initialStatements">
+        <entry key="postPath" value="[enviroment]{working.directory}/initialPostScript"/>
+        <entry key="prevPath" value="[enviroment]{working.directory}/initialPrevScript"/>
+    </section>
+
+</configuration>
