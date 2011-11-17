@@ -36,16 +36,16 @@ public class ReflectionUtils {
     /**
      * Instantiate class and handles reflection exceptions
      */
-    public static <T> T instanciate(final Class<T> clazz, final Object... _params) {
+    public static <T> T instanciate(final Class<T> clazz, final Object... params) {
         try {
-            if (_params != null && _params.length > 0) {
-                final Class[] _types = new Class[_params.length];
+            if (params != null && params.length > 0) {
+                final Class[] _types = new Class[params.length];
 
                 for (int _i = 0; _i < _types.length; _i++) {
-                    _types[_i] = _params[_i].getClass();
+                    _types[_i] = params[_i].getClass();
                 }
 
-                return clazz.getConstructor(_types).newInstance(_params);
+                return clazz.getConstructor(_types).newInstance(params);
             } else
                 return clazz.newInstance();
         } catch (final Exception e) {
@@ -100,18 +100,18 @@ public class ReflectionUtils {
     /**
      * Returns every declared field on the specified class.
      */
-    public static List<Field> getAllFields(final Class clase, final Predicate<Field> _fieldPredicate) {
+    public static List<Field> getAllFields(final Class clase, final Predicate<Field> fieldPredicate) {
         final List<Field> result = new ArrayList<Field>();
 
         if (clase != null) {
             for (final Field each : clase.getDeclaredFields()) {
-                if (_fieldPredicate == null || _fieldPredicate.evaluate(each)) {
+                if (fieldPredicate == null || fieldPredicate.evaluate(each)) {
                     result.add(each);
                 }
             }
 
             for (final Field each : getAllFields(clase.getSuperclass())) {
-                if (_fieldPredicate == null || _fieldPredicate.evaluate(each)) {
+                if (fieldPredicate == null || fieldPredicate.evaluate(each)) {
                     result.add(each);
                 }
             }
@@ -205,6 +205,7 @@ public class ReflectionUtils {
 
     public static Object readField(final Object target, final Field field) {
         try {
+        	field.setAccessible(true);
             return field.get(target);
         } catch (final Exception e) {
             throw new UserException("Cannot get field value", e);
@@ -244,31 +245,36 @@ public class ReflectionUtils {
         return result;
     }
 
-    public static Class getNullSafeClass(final Object _object) {
-        return _object == null ? null : _object.getClass();
+    public static Class getNullSafeClass(final Object object) {
+        return object == null ? null : object.getClass();
     }
 
-    public static void invokeSetter(final Object _object, final String _name, final Object _value) {
-        if (_object == null)
+    public static Object readField(final Object object, final String property) {
+    	return readField(object, getField(object.getClass(), property));
+    }
+    
+    
+    public static void invokeSetter(final Object object, final String property, final Object value) {
+        if (object == null)
             return;
 
-        final Method[] declaredMethods = _object.getClass().getDeclaredMethods();
+        final Method[] declaredMethods = object.getClass().getDeclaredMethods();
 
         try {
 
             for (final Method method : declaredMethods) {
-                if (method.getName().equals("set" + StringUtils.capitalize(_name))) {
-                    ReflectionUtils.invoke(_object, method, _value);
+                if (method.getName().equals("set" + StringUtils.capitalize(property))) {
+                    ReflectionUtils.invoke(object, method, value);
                     return;
                 }
             }
 
         } catch (final Exception ex) {
             throw new UserException("Se ha producido un error invocando " + "set"
-                    + StringUtils.capitalize(_name), ex);
+                    + StringUtils.capitalize(property), ex);
         }
 
-        throw new UserException("No se ha encontrado el setter " + "set" + StringUtils.capitalize(_name));
+        throw new UserException("No se ha encontrado el setter " + "set" + StringUtils.capitalize(property));
 
     }
 
