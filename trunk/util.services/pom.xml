@@ -12,7 +12,7 @@
 		<artifactId>parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
- 
+
 
 	<dependencies>
 		<dependency>
@@ -39,11 +39,42 @@
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>3.5.1</version>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.2-FINAL</version>
 		</dependency>
+
+		<!-- GOOGLE -->
+		<dependency>
+			<groupId>google-collect</groupId>
+			<artifactId>google-collect</artifactId>
+			<version>1.0</version>
+			<classifier>rc1</classifier>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+
+		<dependency>
+			<groupId>gdata-core</groupId>
+			<artifactId>gdata-core</artifactId>
+			<version>1.0</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+
+		<dependency>
+			<groupId>gdata-spreadsheet</groupId>
+			<artifactId>gdata-spreadsheet</artifactId>
+			<version>3.0</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>
 	</dependencies>
+
+
 </project>

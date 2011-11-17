@@ -1,22 +1,24 @@
 package ar.edu.unq.tpi.util.services.jasper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class JasperReportBasic {
 
     public static void main(final String[] args) {
-        // Report<Person> report = new Report<Person>("persona");
-        //
-        // HashMap<String, String> parameters = new HashMap<String, String>();
-        // parameters.put("Title", "Personas");
-        //
-        // List<Person> beanCollection = getBeanCollection();
-        // report.exportPDF(beanCollection, parameters);
-        //
-        // report.exportEXEL(beanCollection, parameters);
-        //
-        // report.exportRTF(beanCollection, parameters);
-        // System.out.println("Done");
+         Report<Person> report = new Report<Person>("persona");
+        
+         HashMap<String, String> parameters = new HashMap<String, String>();
+         parameters.put("Title", "Personas");
+        
+         List<Person> beanCollection = getBeanCollection();
+//         report.exportPDF(beanCollection, parameters);
+        
+//         report.exportEXEL(beanCollection, parameters);
+        
+//         report.exportRTF(beanCollection, parameters);
+         System.out.println("Done");
 
     }
 

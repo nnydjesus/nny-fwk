@@ -53,8 +53,10 @@ public class MailService {
     }
 
     public void send(final String templateName, final String subject, final String... destinatations) {
-        TemplateSource source = new TemplateSource(new StringBuilder().append("mail/").append(templateName)
-                .append(".vm").toString());
+        TemplateSource source = new TemplateSource(new StringBuilder().append("mail/")
+        		.append(templateName).toString());
+//        TemplateSource source = new TemplateSource(new StringBuilder().append("mail/").append(templateName)
+//                .append(".vm").toString());
         this.send(source, subject, destinatations);
     }
 
