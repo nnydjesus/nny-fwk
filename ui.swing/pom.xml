@@ -46,6 +46,16 @@
 			<artifactId>jcalendar-tz</artifactId>
 			<version>1.3.3-4</version>
 		</dependency>
+		<dependency>
+			<groupId>ar.com.syr</groupId>
+			<artifactId>swing-binding</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.syr</groupId>
+			<artifactId>swing-lookAndFeel</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 

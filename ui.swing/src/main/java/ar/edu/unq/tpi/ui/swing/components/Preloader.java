@@ -2,21 +2,22 @@ package ar.edu.unq.tpi.ui.swing.components;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import ar.edu.unq.tpi.base.utils.Path;
 
 public class Preloader extends CenteredJFrame implements Runnable {
     private static final long serialVersionUID = 1L;
 
-    private static final int ANCHO = 625, ALTO = 413;
+    private static final int ANCHO = 315, ALTO = 347;
 
-    private Image fondo = null;
+    private ImageIcon fondo = null;
 
     private Image icono = null;
 
@@ -24,28 +25,33 @@ public class Preloader extends CenteredJFrame implements Runnable {
 
     private Container jframe;
 
-    @Override
-    public void paint(final Graphics fGraphics) {
-        fGraphics.drawImage(fondo, 0, 0, this);
-        fGraphics.setColor(Color.GREEN);
-        fGraphics.setFont(new Font("Arial", Font.BOLD, 19));
-        fGraphics.drawString("Cargando ...", ANCHO / 2 - 95, ALTO / 2);
-        fGraphics.fillRect(ANCHO / 2 - 100, ALTO / 2 + 30, progreso, 30);
-        fGraphics.setColor(Color.BLACK);
-        fGraphics.drawRect(ANCHO / 2 - 101, ALTO / 2 + 29, 201, 32);
+	private boolean close = false;
 
-    }
+	private Graphics fGraphics;
+
+//    @Override
+//    public void paint(final Graphics fGraphics) {
+//    		fGraphics.drawImage(fondo.getImage(), 0, 0, this);
+//        fGraphics.setColor(Color.GREEN);
+//        fGraphics.setFont(new Font("Arial", Font.BOLD, 19));
+//        fGraphics.drawString("Cargando ...", ANCHO / 2 - 95, ALTO / 2);
+//        fGraphics.fillRect(ANCHO / 2 - 100, ALTO / 2 + 30, progreso, 30);
+//        fGraphics.setColor(Color.BLACK);
+//        fGraphics.drawRect(ANCHO / 2 - 101, ALTO / 2 + 29, 201, 32);
+//    }
 
     public Preloader() {
         this.loadImages();
-        Dimension screenSize = super.getToolkit().getScreenSize();
-        super.setResizable(false);
-        super.setUndecorated(true);
-        this.setIconImage(new ImageIcon(this.getLogo()).getImage());
-        this.setLocation((screenSize.width - ANCHO) / 2, (screenSize.height - ALTO) / 2);
-        this.setSize(ANCHO, ALTO);
         super.setIconImage(icono);
-        this.setVisible(true);
+        JLabel background = new JLabel(fondo);
+        background.setSize(ANCHO, ALTO);
+        fondo.setImageObserver(background);
+		this.add(background);
+		super.setResizable(false);
+		super.setUndecorated(true);
+		this.setSize(ANCHO, ALTO);
+		this.centerWindow();
+		this.setVisible(true);
         this.start();
     }
 
@@ -73,31 +79,37 @@ public class Preloader extends CenteredJFrame implements Runnable {
         // throw new RuntimeException(e1);
         // }
         // inicio.play();
-        for (int i = 0; i <= 40; i++) {
-            progreso = i * 5;
-            this.repaint();
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        this.getJframe().setVisible(true);
-        this.setVisible(false);
-        this.dispose();
+//        while(!close){
+//            try {
+//            	repaint();
+////            	this.paint(fGraphics);
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        this.getJframe().setVisible(true);
+//        this.setVisible(false);
+//        this.dispose();
+    }
+    
+    @Override
+    public void close() {
+    	super.close();
+    	this.close = true;
     }
 
     protected void loadImages() {
-        fondo = new ImageIcon(this.getImageLoader()).getImage();
+        fondo = new ImageIcon(this.getImageLoader());
         icono = new ImageIcon(this.iconImage()).getImage();
     }
 
     protected String getImageLoader() {
-        return Path.path() + "Images/trasporte.jpg";
+        return Path.path() + "Images/loader.gif";
     }
 
     public void start() {
-        new Thread(this).start();
+        SwingUtilities.invokeLater(this);
     }
 
     public String iconImage() {
@@ -113,6 +125,6 @@ public class Preloader extends CenteredJFrame implements Runnable {
     }
 
     public static void main(final String[] args) {
-        new Preloader(null, "Sample").start();
+        new Preloader(null, "Sample");
     }
 }

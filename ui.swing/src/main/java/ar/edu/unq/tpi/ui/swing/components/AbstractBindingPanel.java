@@ -1,6 +1,7 @@
 package ar.edu.unq.tpi.ui.swing.components;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -41,6 +42,15 @@ public class AbstractBindingPanel<T> extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.construirPanelEdicion();
 
+	}
+	
+	@Override
+	public void setFont(Font font) {
+		super.setFont(font);
+		if(panelDeBotones != null){
+			titulo.setFont(font);
+			panelDeBotones.getContainer().setFont(font);
+		}
 	}
 
 	protected void construirPanelEdicion() {
@@ -88,7 +98,7 @@ public class AbstractBindingPanel<T> extends JPanel {
 			final String label) {
 		return builder.addBindingIntegerField(property, label);
 	}
-
+	
 	public JFormattedTextField addBindingDoubleField(final String property,
 			final String label) {
 		return builder.addBindingDoubleField(property, label);

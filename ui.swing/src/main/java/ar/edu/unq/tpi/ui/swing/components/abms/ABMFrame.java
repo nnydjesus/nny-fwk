@@ -1,6 +1,9 @@
 package ar.edu.unq.tpi.ui.swing.components.abms;
 
+import java.awt.Font;
 import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -12,7 +15,6 @@ import ar.edu.unq.tpi.base.common.Item;
 import ar.edu.unq.tpi.base.common.ItemComposite;
 import ar.edu.unq.tpi.base.search.Home;
 import ar.edu.unq.tpi.base.utils.IdentificablePersistentObject;
-import ar.edu.unq.tpi.ui.swing.components.AbstractBindingPanel;
 import ar.edu.unq.tpi.ui.swing.components.ActionMethodListener;
 import ar.edu.unq.tpi.ui.swing.components.CenteredJFrame;
 
@@ -29,6 +31,7 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
     private Window parent;
     
     private ActionMethodListener onSaveListener;
+    private ActionMethodListener onCloseListener;
     private Class<T> entityclass;
 	private boolean isEditing;
 
@@ -36,7 +39,7 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
     public ABMFrame(T model,  Window parent,Boolean isEditing) {
         this.parent = parent;
         this.entityclass = (Class<T>) model.getClass();
-        this.setNombre(model.getName());
+        this.setNombre(model.getIdentificableName());
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         this.setEditing(isEditing);
         edicion = new ABMEdition<T>( model, getHome(), this);
@@ -45,11 +48,16 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
         this.addPanels(edicion);
         setEditionModel(model);
         this.addActions();
-        this.setSize(500, 500);
         this.setVisible(false);
     }
 
     protected void addActions() {
+    	this.addWindowListener(new WindowAdapter() {
+        	@Override
+            public void windowClosing(WindowEvent arg0) {
+        		edicion.rollback();
+            }
+          });
         
     }
 
@@ -59,6 +67,14 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
 
     protected void addPanels(final JPanel panel) {
         this.add(panel);
+    }
+    
+    @Override
+    public void setFont(Font f) {
+    	if(edicion != null){
+    		edicion.setFont(f);
+    	}
+    	super.setFont(f);
     }
 
 
@@ -73,11 +89,13 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
     }
 
     protected void setEditionModel(final T observable) {
-        edicion.setModel(observable);
+        edicion.setEditionModel(observable);
     }
 
     public void edicionCancelar() {
-        setVisible(false);
+    	if(onCloseListener!= null)
+            onCloseListener.execute();
+    	close();
     }
     
     public void edicionAceptar(Object object) {
@@ -87,17 +105,13 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
         edicionCancelar();   
     }
 
-    @Override
-    public void mostrar() {
-        this.setVisible(true);
-    }
 
     @Override
     public String toString() {
         return getNombre();
     }
 
-    protected abstract void createForm(AbstractBindingPanel<T> edicion2);
+    protected abstract void createForm(ABMEdition<T> edicion2);
 
     public List<T> getObjects() {
         return getHome().getAll();
@@ -131,6 +145,10 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
     public void onSave(ActionMethodListener actionMethodListener) {
         onSaveListener = actionMethodListener;
     }
+    
+    public void onClose(ActionMethodListener actionMethodListener) {
+        onCloseListener = actionMethodListener;
+    }
 
 	public void setEditing(boolean isEditing) {
 		this.isEditing = isEditing;
@@ -147,5 +165,9 @@ public abstract class ABMFrame<T extends IdentificablePersistentObject> extends 
 	public Class<T> getEntityclass() {
 		return entityclass;
 	}
-
+	
+	public T getModel(){
+		return this.edicion.getModel();
+	}
+	
 }

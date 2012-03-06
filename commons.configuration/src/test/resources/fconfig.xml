@@ -64,7 +64,7 @@
     </section-->
 
     <section name="modules">
-        <entry key="package.prefix" value="ar.com.syr.transporte"/>
+        <entry key="package.prefix" value="ar.com.syr"/>
     </section>
 
     <section name="pagination">

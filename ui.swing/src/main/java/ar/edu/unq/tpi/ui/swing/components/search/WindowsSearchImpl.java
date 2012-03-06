@@ -2,6 +2,7 @@ package ar.edu.unq.tpi.ui.swing.components.search;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.table.JTableHeader;
 
 import ar.edu.unq.tpi.base.common.Item;
 import ar.edu.unq.tpi.base.search.Home;
@@ -26,11 +27,11 @@ public class WindowsSearchImpl<T extends IdentificablePersistentObject> extends 
     
     @Override
     public String toString() {
-        return "Totalidad de " + search.getModel().getName();
+        return "Totalidad de " + search.getModel().getIdentificableName();
     }
 
     @Override
-    public void mostrar() {
+    public void open() {
         search.search();
         this.setVisible(true);
     }
@@ -53,6 +54,11 @@ public class WindowsSearchImpl<T extends IdentificablePersistentObject> extends 
 	@Override
 	public T getDefaultModel() {
 		return search.getHome().createExample();
+	}
+	@Override
+	public void conconfigureTableHeader(JTableHeader header) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

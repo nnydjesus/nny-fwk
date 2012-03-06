@@ -34,7 +34,7 @@ public class FrameworkConfiguration {
     public static boolean isInitializerAllowed() {
         return JFigConfiguration.getInstance().getBoolean("enviroment", "initializer.on");
     }
-
+    
 
     public static File getWorkingDirectoryFile() {
         final File _file = new File(JFigConfiguration.getInstance().getString("enviroment", "working.directory"));
@@ -176,6 +176,10 @@ public class FrameworkConfiguration {
 
     public static boolean recreateSchemaOnGeneration() {
         return JFigConfiguration.getInstance().getBoolean("hibernate", "ddl.recreateSchema");
+    }
+    
+    public static boolean logEnabled() {
+        return JFigConfiguration.getInstance().getBoolean("enviroment", "log");
     }
     
 

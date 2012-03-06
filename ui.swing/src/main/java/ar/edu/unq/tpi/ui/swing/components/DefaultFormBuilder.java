@@ -1,18 +1,13 @@
 package ar.edu.unq.tpi.ui.swing.components;
 
 import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.Font;
 import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.hibernate.cfg.annotations.PropertyBinder;
-
-import com.jgoodies.binding.adapter.Bindings;
-import com.jgoodies.binding.beans.PropertyAdapter;
 import com.jgoodies.forms.builder.I15dPanelBuilder;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ConstantSize;
@@ -437,7 +432,7 @@ public class DefaultFormBuilder extends I15dPanelBuilder {
 		ensureCursorColumnInGrid();
 		ensureHasGapRow(lineGapSpec);
 		ensureHasComponentLine();
-
+		component.setFont(getFont());
 		add(component, createLeftAdjustedConstraints(columnSpan));
 		nextColumn(columnSpan + 1);
 	}
@@ -484,6 +479,7 @@ public class DefaultFormBuilder extends I15dPanelBuilder {
 	 */
 	public JLabel append(String textWithMnemonic) {
 		JLabel label = getComponentFactory().createLabel(textWithMnemonic);
+		label.setFont(getFont());
 		append(label);
 		return label;
 	}
@@ -555,6 +551,8 @@ public class DefaultFormBuilder extends I15dPanelBuilder {
 		append(c, columnSpan);
 		return label;
 	}
+	
+	private Font font = new Font("Arial", Font.PLAIN, 24);
 
 	/**
 	 * Adds a text label and two components to the panel; each component will
@@ -964,6 +962,14 @@ public class DefaultFormBuilder extends I15dPanelBuilder {
 	 */
 	private RowSpec getCursorRowSpec() {
 		return getLayout().getRowSpec(getRow());
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
 	}
 
 }

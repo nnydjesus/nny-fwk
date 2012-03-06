@@ -1,5 +1,6 @@
 package ar.edu.unq.tpi.ui.swing.components.search;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -16,9 +17,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.table.JTableHeader;
 
 import ar.edu.unq.tpi.base.common.Observable;
 import ar.edu.unq.tpi.base.persistence.PersistentObject;
+import ar.edu.unq.tpi.base.persistence.transaction.UseCase;
+import ar.edu.unq.tpi.base.persistence.transaction.UseCaseManager;
 import ar.edu.unq.tpi.base.search.Home;
 import ar.edu.unq.tpi.ui.swing.components.AbstractBindingPanel;
 import ar.edu.unq.tpi.ui.swing.components.ActionMethodListener;
@@ -31,7 +35,6 @@ import ar.edu.unq.tpi.ui.swing.components.ModelBinding;
 import ar.edu.unq.tpi.ui.swing.components.TableSelection;
 import ar.edu.unq.tpi.ui.swing.components.WindowsSearch;
 import ar.edu.unq.tpi.ui.swing.components.autocomplete.AutoCompleteTextField;
-import ar.edu.unq.tpi.ui.swing.components.autocomplete.LimeTextField;
 
 import com.jgoodies.binding.adapter.Bindings;
 import com.jgoodies.binding.value.ValueModel;
@@ -43,6 +46,7 @@ public class SearchPanel<T extends PersistentObject> extends
 	private static final long serialVersionUID = 1L;
 
 	public static final String UPDATE_TOTAL = "updateTotals";
+	public static final String SEARCH = "search";
 
 	private JButton search;
 
@@ -50,7 +54,7 @@ public class SearchPanel<T extends PersistentObject> extends
 
 	private Home<T> home;
 
-	private GeneralTable table;
+	private GeneralTable<T> table;
 
 	private List<T> result = new ArrayList<T>();
 
@@ -71,7 +75,9 @@ public class SearchPanel<T extends PersistentObject> extends
 		super(model);
 		this.parent = parent;
 		this.setHome(home);
+		this.search();
 		setTable(this.createTable(home.createExample()));
+		addMyButtons();
 		this.addActions();
 		panelPrint = new JPanel();
 		this.add(panelPrint);
@@ -101,10 +107,22 @@ public class SearchPanel<T extends PersistentObject> extends
 
 	public void delete() {
 		try {
-			Object selected = table.getSelected();
-			getHome().delete((T) selected);
-			search();
-			parent.deleteObject(selected);
+			UseCaseManager.execute(new UseCase() {
+				
+				@Override
+				public void run() {
+					T selected = table.getSelected();
+					getHome().delete(selected);
+					search();
+					parent.deleteObject(selected);
+					
+				}
+				
+				@Override
+				public String getName() {
+					return "Delete: " + getModel().getClass().getSimpleName();
+				}
+			});
 		} catch (IndexOutOfBoundsException e) {
 			JOptionPane
 					.showMessageDialog(
@@ -114,18 +132,20 @@ public class SearchPanel<T extends PersistentObject> extends
 		}
 	}
 
-	protected GeneralTable createTable(final T newInstance) {
+	protected GeneralTable<T> createTable(final T newInstance) {
 		return Generator.GENERATE_TABLE(getResult(), newInstance.atributos(),
 				this);
 	}
 
-	@Override
-	protected void addButtons() {
+	protected void addMyButtons() {
 		this.search = new JButton();
+		this.search.setFont(getFont());
 		this.search.setText("Buscar");
 		this.clear = new JButton();
+		this.clear.setFont(getFont());
 		this.clear.setText("Limpiar");
 		this.delete = new JButton();
+		this.delete.setFont(getFont());
 		this.delete.setText("Borrar");
 		delete.addActionListener(new ActionMethodListener(this, "delete"));
 
@@ -145,24 +165,6 @@ public class SearchPanel<T extends PersistentObject> extends
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
 				printTabla();
-				// try {
-				// PrintUtilities.printComponent(SearchPanel.this.panelPrint);
-				// try {
-				// table.getTabla().print();
-				// } catch (PrinterException e) {
-				// e.printStackTrace();
-				// }
-				// } catch (PrinterException e) {
-				// e.printStackTrace();
-				// }
-			}
-		});
-
-		getTopPanel().getCalculadora().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				Calculadora.open();
 			}
 		});
 
@@ -230,7 +232,7 @@ public class SearchPanel<T extends PersistentObject> extends
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		for (Pair<String, Boolean> pair : totals.keySet()) {
 			double total = 0.0;
-			for (Observable objeject : ((ModelBinding) table.getTabla()
+			for (Observable objeject : ((ModelBinding<Observable>) table.getTabla()
 					.getModel()).getDatos()) {
 				value = (Double) objeject.getProperty(pair.getObject1());
 				if (value != null)
@@ -301,6 +303,20 @@ public class SearchPanel<T extends PersistentObject> extends
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Override
+	public Font getFont(){
+		if(this.parent != null){
+			return this.parent.getFont();
+		}else{
+			return super.getFont();
+		}
+	}
+
+	@Override
+	public void configureTableHeader(JTableHeader header) {
+		this.parent.conconfigureTableHeader(header); 
 	}
 
 }

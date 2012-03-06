@@ -2,9 +2,9 @@ package ar.edu.unq.tpi.ui.swing.components;
 
 import java.awt.event.MouseListener;
 import java.awt.print.PrinterException;
+import java.util.List;
 
 import javax.swing.GroupLayout;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
@@ -19,12 +19,12 @@ import ar.edu.unq.tpi.util.commons.exeption.UserException;
  * 
  * @author Ronny
  */
-public class GeneralTable extends GeneralPanel {
+public class GeneralTable<E> extends GeneralPanel {
 
     private static final long serialVersionUID = 1L;
 
     /** Modelo de la tabla */
-    private ModelBinding modelo = null;
+    private ModelBinding<E> modelo = null;
 
     private JScrollPane scroll = new JScrollPane();
 
@@ -35,11 +35,11 @@ public class GeneralTable extends GeneralPanel {
      * llama al metodo construyeVentana() que se encarga de crear los
      * componentes.
      */
-    public GeneralTable(final ModelBinding modelo){
+    public GeneralTable(final ModelBinding<E> modelo){
         this(modelo, new JTable());
     }
 
-    public GeneralTable(final ModelBinding modelo, final JTable tabla) {
+    public GeneralTable(final ModelBinding<E> modelo, final JTable tabla) {
     	super();
     	this.tabla = tabla;
     	this.setModelo(modelo);
@@ -82,7 +82,7 @@ public class GeneralTable extends GeneralPanel {
         return tabla;
     }
 
-    public Object getSelected() {
+    public E getSelected() {
         return getModelo().getSelected(tabla.getSelectedRow());
     }
 
@@ -90,12 +90,21 @@ public class GeneralTable extends GeneralPanel {
         tabla.addMouseListener(actionListener);
     }
 
-    public void setModelo(ModelBinding modelo) {
+    public void setModelo(ModelBinding<E> modelo) {
         this.modelo = modelo;
     }
 
-    public ModelBinding getModelo() {
+    public ModelBinding<E> getModelo() {
         return modelo;
+    }
+    
+    public void update(List<E> data){
+    	this.modelo.setDatos(data);
+    	autoAjuste();
+    }
+    
+    public List<E> getData(){
+    	return this.modelo.getDatos();
     }
 
 	public void print() {
@@ -113,9 +122,9 @@ public class GeneralTable extends GeneralPanel {
 			TableColumn col = colModel.getColumn(c);
 			int length = col.getHeaderValue().toString().length();
 			int maxWithByColum = maxWithByColum(c, length);
-			col.setMaxWidth(maxWithByColum+10);
+			col.setMaxWidth(maxWithByColum + (4*this.tabla.getFont().getSize()));
 			col.setPreferredWidth(maxWithByColum);
-			col.setMinWidth(maxWithByColum-10);
+			col.setMinWidth(maxWithByColum + (4*this.tabla.getFont().getSize()));
 		}
 	}
 	
@@ -123,8 +132,9 @@ public class GeneralTable extends GeneralPanel {
 		int max=length;
 		for (int i = 0; i < tabla.getRowCount(); i++) {
 			Object valueAt = modelo.getValueAt(i, column);
-			if(valueAt != null && valueAt.toString().length() > max){
-				max = valueAt.toString().length();
+			int headerLength = tabla.getTableHeader().getColumnModel().getColumn(column).getHeaderValue().toString().length();
+			if(valueAt != null){
+				max = Math.max(Math.max(valueAt.toString().length(), headerLength), max);
 			}
 		}
 		return max*11;
