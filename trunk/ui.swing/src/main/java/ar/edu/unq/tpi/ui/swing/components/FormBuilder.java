@@ -4,10 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.text.FieldPosition;
 import java.text.Format;
 import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -20,13 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
-import org.apache.commons.beanutils.PropertyUtilsBean;
-
 import ar.edu.unq.tpi.base.common.Observable;
 
 import com.jgoodies.binding.adapter.Bindings;
 import com.jgoodies.binding.beans.BeanAdapter;
-import com.jgoodies.binding.beans.PropertyAdapter;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ValueModel;
 import com.jgoodies.forms.layout.FormLayout;
@@ -47,6 +42,10 @@ public class FormBuilder<T> extends DefaultFormBuilder{
 
     public FormBuilder(final T model) {
         this(model,new FormLayout("p, 2dlu, p:g"));
+    }
+    
+    public FormBuilder() {
+        this(null,new FormLayout("p, 2dlu, p:g"));
     }
 
     private void construirPanelEdicion() {
@@ -93,15 +92,12 @@ public class FormBuilder<T> extends DefaultFormBuilder{
         this.append(label, textField);
         return textField;
     }
-
+    
     public JDateChooser addBindingDateField(final String property, final String label) {
         JDateChooser date = new JDateChooser();
-        date.setPreferredSize(new Dimension(130, 20));
-        date.setFont(new Font("Verdana", Font.PLAIN, 10));
         date.setDateFormatString("dd/M/yyyy");
 
-		 URL iconURL = date.getClass().getResource(
-		 "/com/toedter/calendar/images/JMonthChooserColor32.gif");
+		 URL iconURL = date.getClass().getResource("/com/toedter/calendar/images/JMonthChooserColor32.gif");
 		 ImageIcon icon = new ImageIcon(iconURL);
 		 date.setIcon(icon);
         ValueModel nameModel = beanAdapter.getValueModel(property);
@@ -154,7 +150,6 @@ public class FormBuilder<T> extends DefaultFormBuilder{
     public void setModel(final T object) {
         this.model = (T) object;
         beanAdapter.setBean(object);
-
     }
 
     public BeanAdapter<T> getBeandAdapter() {

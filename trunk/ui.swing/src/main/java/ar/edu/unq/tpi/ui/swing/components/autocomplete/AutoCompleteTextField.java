@@ -66,6 +66,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
         this.enableEvents(AWTEvent.KEY_EVENT_MASK);
         this.enableEvents(AWTEvent.HIERARCHY_EVENT_MASK);
         this.enableEvents(AWTEvent.FOCUS_EVENT_MASK);
+        this.enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         entryList = new AutoCompleteList();
         this.showPopup();
     }
@@ -82,7 +83,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
             String selection = (String) entryList.getSelectedStringValue();
             this.hidePopup();
             if (selection != null) {
-                this.setText(selection);
+                this.setValue(selection);
                 return;
             }
         }
@@ -411,8 +412,8 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
             super.processMouseEvent(me);
 
             if (me.getID() == MouseEvent.MOUSE_CLICKED) {
-                dict.clear();
-                AutoCompleteTextField.this.hidePopup();
+               // dict.clear();	
+                //AutoCompleteTextField.this.hidePopup();
             }
         }
     }
@@ -442,7 +443,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
 
         protected void selectText() {
             String selection = (String) this.getSelectedStringValue();
-            AutoCompleteTextField.this.setText(selection);
+            AutoCompleteTextField.this.setValue(selection);
             AutoCompleteTextField.this.hidePopup();
         }
 
@@ -450,6 +451,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
         protected void processMouseEvent(final MouseEvent me) {
             super.processMouseEvent(me);
             if (me.getID() == MouseEvent.MOUSE_CLICKED) {
+            	AutoCompleteTextField.this.setValue(currentText);
                 this.selectText();
             }
         }
@@ -466,13 +468,13 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
          */
         void incrementSelection() {
             if (this.getSelectedIndex() == this.getModel().getSize() - 1) {
-                AutoCompleteTextField.this.setText(currentText);
+                AutoCompleteTextField.this.setValue(currentText);
                 this.clearSelection();
             } else {
                 int selectedIndex = this.getSelectedIndex() + 1;
                 this.setSelectedIndex(selectedIndex);
                 this.ensureIndexIsVisible(selectedIndex);
-                AutoCompleteTextField.this.setText(this.getSelectedStringValue());
+                AutoCompleteTextField.this.setValue(this.getSelectedStringValue());
             }
         }
 
@@ -481,7 +483,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
          */
         void decrementSelection() {
             if (this.getSelectedIndex() == 0) {
-                AutoCompleteTextField.this.setText(currentText);
+                AutoCompleteTextField.this.setValue(currentText);
                 this.clearSelection();
             } else {
                 int selectedIndex = this.getSelectedIndex();
@@ -492,7 +494,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
                 }
                 this.setSelectedIndex(selectedIndex);
                 this.ensureIndexIsVisible(selectedIndex);
-                AutoCompleteTextField.this.setText(this.getSelectedStringValue());
+                AutoCompleteTextField.this.setValue(this.getSelectedStringValue());
             }
         }
 
@@ -511,7 +513,7 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
             if(super.getSelectedValue()!=null)
                 return super.getSelectedValue().toString();
             else
-                return "";
+                return currentText;
         }
     }
 

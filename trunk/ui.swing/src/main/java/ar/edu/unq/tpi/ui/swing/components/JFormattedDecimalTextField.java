@@ -1,31 +1,32 @@
 package ar.edu.unq.tpi.ui.swing.components;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.text.DecimalFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.text.NumberFormatter;
 
-import ar.edu.unq.tpi.ui.swing.components.autocomplete.LimeTextField;
-
 public class JFormattedDecimalTextField extends JFormattedTextField {
 
-    private static final long serialVersionUID = 1L;
-    private static DecimalFormat decimalFormat;
-    private static NumberFormatter decimalFormatt;
-    static{
-    	decimalFormat = new DecimalFormat("#.##");
-    	decimalFormat.setMinimumFractionDigits(2);
-    	decimalFormatt = new NumberFormatter(decimalFormat);
-    	decimalFormatt.setValueClass(Double.class);
-//    	decimalFormat.set
-//    	decimalFormat.set
-//    	format.setDecimalSeparatorAlwaysShown(true);
-//    	format.setParseBigDecimal(true);
-//    	decimalFormat.setFormat(format);
-//    	decimalFormat.setValueClass(Double.class);
-    }
+	private static final long serialVersionUID = 1L;
+	public static final DecimalFormat decimalFormat;
 
-    public JFormattedDecimalTextField() {
-        super(decimalFormatt);
-    }
+	static {
+		decimalFormat = new DecimalFormat("#.#");
+		decimalFormat.setMinimumFractionDigits(2);
+	}
+
+	public JFormattedDecimalTextField() {
+		super(decimalFormat);
+
+		this.addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				super.focusGained(e);
+				selectAll();
+			}
+		});
+	}
 }

@@ -23,8 +23,6 @@ import ar.edu.unq.tpi.ui.swing.components.FrameLook;
 public class Menu extends JMenuBar {
     private static final long serialVersionUID = 1L;
 
-    private JMenu menuArchivo;
-
     private JMenu menuconfiguracion;
 
     private JMenu aparienciaItem;
@@ -63,9 +61,8 @@ public class Menu extends JMenuBar {
 
     private JMenuItem lookSahara;
 
-    public Menu(final FrameLook reproductor) {
-        parent = reproductor;
-        menuArchivo = new JMenu("Archivo");
+    public Menu(final FrameLook parent) {
+        this.parent = parent;
         menuconfiguracion = new JMenu("Configuracion");
         aparienciaItem = new JMenu("Apariencia");
         lookBusinessBlackSteel = new JMenuItem("BusinessBlackSteel");
@@ -101,9 +98,25 @@ public class Menu extends JMenuBar {
         aparienciaItem.add(lookMagellan);
         aparienciaItem.add(lookMagma);
         aparienciaItem.add(lookSahara);
-        this.add(menuArchivo);
+        
+        updateFont();
+        
         this.add(menuconfiguracion);
     }
+
+	protected void updateFont() {
+		lookBusinessBlackSteel.setFont(this.getFont());
+        aparienciaItem.setFont(this.getFont());
+        lookEmeraldDus.setFont(this.getFont());
+        lookLegacy.setFont(this.getFont());
+        lookRavenGraphiteGlass.setFont(this.getFont());
+        lookTwilight.setFont(this.getFont());
+        lookMagellan.setFont(this.getFont());
+        lookMagma.setFont(this.getFont());
+        lookSahara.setFont(this.getFont());
+        menuconfiguracion.setFont(this.getFont());
+        aparienciaItem.setFont(this.getFont());
+	}
 
     public void addActions() {
         lookBusinessBlackSteel.addActionListener(new AparienciaListener(substanceBusinessBlackSteelLookAndFeel));

@@ -29,9 +29,10 @@ public class Calculadora extends CenteredJFrame implements ActionListener, KeyLi
 
 	public Calculadora() {
 		setTitle("Calculadora");
-		setSize(250, 200);
 		Pantalla();
 		Teclado();
+		this.setSize(500, 400);
+		this.centerWindow();
 	}
 
 	private void Pantalla() {
@@ -43,7 +44,7 @@ public class Calculadora extends CenteredJFrame implements ActionListener, KeyLi
 		pantalla.setText("0");
 		pantalla.setAlignment(Label.RIGHT);
 		pantalla.setForeground(Color.black);
-		pantalla.setFont(new Font("Verdana", Font.BOLD, 20));
+		pantalla.setFont(new Font("Verdana", Font.BOLD, 25));
 		pantalla.setBackground(Color.white);
 		pantalla.addKeyListener(this);
 
@@ -86,7 +87,7 @@ public class Calculadora extends CenteredJFrame implements ActionListener, KeyLi
 		b = new JButton(n);
 
 		b.setForeground(color);
-		b.setFont(new Font("Verdana", Font.BOLD, 10));
+		b.setFont(new Font("Verdana", Font.BOLD, 20));
 		panel2.add(b);
 
 		b.addKeyListener(this);
@@ -227,12 +228,12 @@ public class Calculadora extends CenteredJFrame implements ActionListener, KeyLi
 	public void keyReleased(KeyEvent e) {
 	}
 	
-	public static void open(){
+	public static void OPEN(){
     	INSTANCE.clean();
     	INSTANCE.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		 new Calculadora().setVisible(true);
+		 new Calculadora().open();
 	}
 }

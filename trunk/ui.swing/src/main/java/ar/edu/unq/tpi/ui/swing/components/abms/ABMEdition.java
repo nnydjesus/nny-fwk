@@ -7,6 +7,8 @@ import java.util.List;
 import ar.edu.unq.tpi.base.search.Home;
 import ar.edu.unq.tpi.base.utils.IdentificablePersistentObject;
 
+import com.uqbar.renascent.framework.aop.transaction.ObjectTransactionManager;
+
 public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEdicion<T> {
     private static final long serialVersionUID = 1L;
 
@@ -21,8 +23,10 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
 
     public ABMEdition(T model,Home<T> home, WindowsEdition parent) {
         super(model);
+        ObjectTransactionManager.begin(this);
         this.parent = parent;
         this.home = home;
+        this.setFont(parent.getFont());
         this.addActions();
     }
 
@@ -32,35 +36,23 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                tengo = true;
-                ABMEdition.this.edicionAceptar();
-                tengo = false;
+            	onAccept();
             }
         });
 
-//        this.getBotonModificar().addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(final ActionEvent e) {
-//                ABMEdition.this.edicionModificar();
-//                setEditionModel(home.createExample());
-//            }
-//        });
         this.getBotonCancelar().addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                ABMEdition.this.edicionCancelar();
-                setEditionModel(home.createExample());
+            	onCancel();
             }
         });
+        
 
     }
 
     protected void edicionAceptar() {
         parent.edicionAceptar(this.getModel());
-        home.saveOrUpdate(this.getModel());
-        setEditionModel(home.createExample());
     }
 
 
@@ -70,17 +62,8 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
         this.setModel(observable);
     }
 
-//    protected void edicionModificar() {
-//        T model = this.getModel();
-//        if (model.getId() != null) {
-//            home.update(model);
-////            this.getBotonModificar().setEnabled(false);
-//            parent.edicionModificar();
-//        }
-//    }
 
     protected void edicionCancelar() {
-//        this.getBotonModificar().setEnabled(false);
         parent.edicionCancelar();
     }
 
@@ -102,5 +85,26 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
     public String getNombre() {
         return nombre;
     }
+
+	public void commit() {
+		ObjectTransactionManager.commit(ABMEdition.this);
+	}
+
+	public void rollback() {
+		ObjectTransactionManager.rollback(ABMEdition.this);
+	}
+
+	public void onAccept() {
+		commit();
+		tengo = true;
+		ABMEdition.this.edicionAceptar();
+		tengo = false;
+	}
+
+	public void onCancel() {
+		rollback();
+		ABMEdition.this.edicionCancelar();
+		setEditionModel(home.createExample());
+	}
 
 }

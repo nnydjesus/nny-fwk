@@ -15,9 +15,6 @@ import java.util.List;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
-import org.junit.Assert;
-
-import ar.edu.unq.tpi.util.commons.exeption.UserException;
 
 /**
  * @author Ronny
@@ -49,7 +46,7 @@ public class ReflectionUtils {
             } else
                 return clazz.newInstance();
         } catch (final Exception e) {
-            throw new UserException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -59,7 +56,7 @@ public class ReflectionUtils {
             constructor.setAccessible(true);
             return constructor.newInstance(new Object[0]);
         } catch (final Exception e) {
-            throw new UserException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -163,9 +160,9 @@ public class ReflectionUtils {
         try {
             return method.invoke(object, params);
         } catch (final InvocationTargetException e) {
-            throw new UserException("Exception during method invocation", e);
+            throw new RuntimeException("Exception during method invocation", e);
         } catch (final Exception e) {
-            throw new UserException("Cannot invoke method", e);
+            throw new RuntimeException("Cannot invoke method", e);
         }
     }
 
@@ -199,7 +196,7 @@ public class ReflectionUtils {
         try {
             return clazz.getDeclaredField(string);
         } catch (final Exception e) {
-            throw new UserException("Cannot recover field " + string + " from class " + clazz, e);
+            throw new RuntimeException("Cannot recover field " + string + " from class " + clazz, e);
         }
     }
 
@@ -208,7 +205,7 @@ public class ReflectionUtils {
         	field.setAccessible(true);
             return field.get(target);
         } catch (final Exception e) {
-            throw new UserException("Cannot get field value", e);
+            throw new RuntimeException("Cannot get field value", e);
         }
     }
 
@@ -216,7 +213,7 @@ public class ReflectionUtils {
         try {
             field.set(target, value);
         } catch (final Exception e) {
-            throw new UserException("Cannot set field value", e);
+            throw new RuntimeException("Cannot set field value", e);
         }
     }
 
@@ -270,11 +267,11 @@ public class ReflectionUtils {
             }
 
         } catch (final Exception ex) {
-            throw new UserException("Se ha producido un error invocando " + "set"
+            throw new RuntimeException("Se ha producido un error invocando " + "set"
                     + StringUtils.capitalize(property), ex);
         }
 
-        throw new UserException("No se ha encontrado el setter " + "set" + StringUtils.capitalize(property));
+        throw new RuntimeException("No se ha encontrado el setter " + "set" + StringUtils.capitalize(property));
 
     }
 

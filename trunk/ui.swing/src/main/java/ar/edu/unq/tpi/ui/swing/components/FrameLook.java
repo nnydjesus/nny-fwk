@@ -1,6 +1,5 @@
 package ar.edu.unq.tpi.ui.swing.components;
 
-import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -8,18 +7,27 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import ar.edu.unq.tpi.ui.swing.components.menu.styles.Menu;
 
-public class FrameLook extends JFrame {
+public class FrameLook extends CenteredJFrame{
 
     private static final long serialVersionUID = 1L;
 
     protected LookAndFeel look;
+
+	private Preloader loader;
 
     public FrameLook() {
         this.setJMenuBar(new Menu(this));
     }
 
     protected void setLoader(final Preloader loader) {
-        loader.start();
+        this.loader = loader;
+		loader.start();
+    }
+    
+    protected void closeLoader(){
+    	if(loader != null){
+    		loader.close();
+    	}
     }
 
     public void setLook(final LookAndFeel look2) {
@@ -39,7 +47,7 @@ public class FrameLook extends JFrame {
 
     protected void updateUI() throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(look);
-        SwingUtilities.updateComponentTreeUI(FrameLook.this.getParent());
+        SwingUtilities.updateComponentTreeUI(FrameLook.this);
     }
 
 }

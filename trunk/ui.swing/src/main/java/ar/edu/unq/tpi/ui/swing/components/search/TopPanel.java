@@ -1,11 +1,15 @@
 package ar.edu.unq.tpi.ui.swing.components.search;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import ar.edu.unq.tpi.base.utils.Path;
+import ar.edu.unq.tpi.ui.swing.components.Calculadora;
 import ar.edu.unq.tpi.ui.swing.components.GeneralPanel;
 
 public class TopPanel extends GeneralPanel {
@@ -44,12 +48,24 @@ public class TopPanel extends GeneralPanel {
 		//
 		// setLayout(layout);
 		initComponents();
+		addActions();
+	}
+
+	public void addActions() {
+		this.btcalculadora.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calculadora.OPEN();				
+			}
+		});		
+		
 	}
 
 	private void initComponents() {
 		btImprimir = new JButton(new ImageIcon(Path.path()
-				+ "Images/assignments.jpg"));
-		btCerrar = new JButton(new ImageIcon(Path.path() + "Images/cancel.jpg"));
+				+ "Images/imprimir.png"));
+		btCerrar = new JButton(new ImageIcon(Path.path() + "Images/cancel.png"));
 		setCalculadora(new JButton(new ImageIcon(Path.path()
 				+ "Images/calculadora.png")));
 

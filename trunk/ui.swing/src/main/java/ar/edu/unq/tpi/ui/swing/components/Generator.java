@@ -17,10 +17,12 @@ import com.jgoodies.binding.list.SelectionInList;
 public class Generator {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static GeneralTable GENERATE_TABLE(List<?> tablaList, String[] fields, final TableSelection parent) {
-		SelectionInList<?> selectionInList = new SelectionInList(tablaList);		
+	public static <E>GeneralTable<E> GENERATE_TABLE(List<E> tablaList, String[] fields, final TableSelection parent) {
+		SelectionInList<E> selectionInList = new SelectionInList(tablaList);		
 		ModelBinding tablaModel = new ModelBinding(selectionInList, fields);		
 		final TableAdapter table = new TableAdapter();
+		table.setFont(parent.getFont());
+		parent.configureTableHeader(table.getTableHeader());
 		table.setBorder(new SubstanceBorder(new Insets(20, 20, 20, 20)));
 		
 		
@@ -28,7 +30,7 @@ public class Generator {
 		table.setSelectionModel(new SingleListSelectionAdapter(
 				selectionInList.getSelectionIndexHolder()));
 
-		final GeneralTable generalTable = new GeneralTable(tablaModel, table);
+		final GeneralTable<E> generalTable = new GeneralTable<E>(tablaModel, table);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
