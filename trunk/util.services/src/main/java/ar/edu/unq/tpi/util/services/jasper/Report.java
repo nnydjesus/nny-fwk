@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -18,7 +20,7 @@ import net.sf.jasperreports.engine.export.JRXlsExporter;
 import ar.edu.unq.tpi.util.commons.exeption.UserException;
 
 public class Report<T> {
-    private static final String PATH = "src/main/resources/jasper/";
+    public static final String PATH = "src/main/resources/jasper/";
 
     private JasperReport jasperReport;
 

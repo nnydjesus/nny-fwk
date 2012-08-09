@@ -7,13 +7,13 @@ import java.util.List;
 public class JasperReportBasic {
 
     public static void main(final String[] args) {
-         Report<Person> report = new Report<Person>("persona");
+         Report<Person> report = new Report<Person>("plantilla");
         
          HashMap<String, String> parameters = new HashMap<String, String>();
          parameters.put("Title", "Personas");
         
          List<Person> beanCollection = getBeanCollection();
-//         report.exportPDF(beanCollection, parameters);
+         report.exportPDF("/home/nny/Descargas/personas.pdf", beanCollection, parameters);
         
 //         report.exportEXEL(beanCollection, parameters);
         
