@@ -26,6 +26,10 @@ public class Container implements Serializable {
         public Integer asInteger() {
             return Integer.parseInt(value);
         }
+        
+        public Double asDouble() {
+            return Double.parseDouble(value);
+        }
 
         public Float asFloat() {
             return Float.parseFloat(value);

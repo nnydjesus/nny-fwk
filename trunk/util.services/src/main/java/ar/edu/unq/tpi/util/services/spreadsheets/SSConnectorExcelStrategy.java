@@ -64,7 +64,7 @@ public final class SSConnectorExcelStrategy implements SSConnectorStrategy {
         headers.clear();
 
         try {
-            inputStream = new FileInputStream(new File(DDLGenerator.ROOT_RT_PATH() + "web-gae/excels-cache/" + spreadsheetEntryName + ".xls"));
+            inputStream = new FileInputStream(new File(DDLGenerator.ROOT_RT_PATH() + "excels-cache/" + spreadsheetEntryName + ".xls"));
 
             final POIFSFileSystem fileSystem = new POIFSFileSystem(inputStream);
             final HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);

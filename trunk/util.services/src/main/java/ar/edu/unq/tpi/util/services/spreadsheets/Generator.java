@@ -2,7 +2,6 @@ package ar.edu.unq.tpi.util.services.spreadsheets;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,15 +9,13 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 
+
+
+@SuppressWarnings("rawtypes")
 public class Generator{
 
-    private static final Map<Long, String> timesMap = Collections.synchronizedMap(new TreeMap<Long, String>(new Comparator<Long>() {
 
-        @Override
-        public int compare(final Long l1, final Long l2) {
-            return l2.compareTo(l1);
-        }
-    }));
+	private static final Map<Long, String> timesMap = Collections.synchronizedMap(new TreeMap<Long, String>(new ComtareToCompare()));
 
     protected static final Logger log = Logger.getLogger(Generator.class.getName());
 
@@ -30,12 +27,28 @@ public class Generator{
 
 	private String sheetName;
 
-    
-    public void configMap(Function f, SSConnectorStrategy connector, String sheetName) {
-    	this.function = f;
-    	this.connector = connector;
-    	this.sheetName = sheetName;
+	private String worksheet;
+
+	public void configMap(Function f, SSConnectorStrategy connector, String sheetName) {
+		this.function = f;
+		this.connector = connector;
+		this.sheetName = sheetName;
 	}
+	
+	public void configMap(Function f, SSConnectorStrategy connector, String sheetName, String worksheet) {
+		configMap(f, connector, sheetName);
+		this.worksheet = worksheet;
+	}
+    
+    
+    public <T> List<T> map(Function f, SSConnectorStrategy connector, String sheetName, String worksheet) {
+    	configMap(f, connector, sheetName, worksheet);
+    	try {
+			return generate();
+		} catch (Exception e) {
+			throw new GeneratorExcepction("Bumm", e);
+		}
+    }
     
     public <T> List<T> map(Function f, SSConnectorStrategy connector, String sheetName) {
     	configMap(f, connector, sheetName);
@@ -70,9 +83,14 @@ public class Generator{
     }
 
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({ "unchecked" })
 	protected <T> List<T> generateImpl() throws Exception {
-		connector.parseSheet(this.sheetName);
+    	if(worksheet != null){
+    		connector.parseSheet(this.sheetName, worksheet);
+    		
+    	}else{
+    		connector.parseSheet(this.sheetName);
+    	}
 		List results = new ArrayList();
 		for (Map<String,Container> item : connector.getValues()) {
 			results.add(this.function.execute(item));
@@ -104,4 +122,5 @@ public class Generator{
 	protected Function getFunction() {
 		return function;
 	}
+	
 }

@@ -4,18 +4,18 @@ import java.util.Map;
 
 
 
-public class GeneratorTest extends Generator {
-	public GeneratorTest() {
+
+
+public class GeneratorTestOld extends Generator {
+	public GeneratorTestOld() {
 		configMap(f(), new SSConnectorRefreshStrategy("nny.fwk@gmail.com", "sarasaza" ), "pruebaSS");
 	}
 
-	@SuppressWarnings("unchecked")
-	protected  static Function f() {
-		return new Function() {
+	protected  static Function<Map<String, Container>, Object> f() {
+		return new Function<Map<String, Container>, Object>() {
 			
 			@Override
-			public <T, J> J execute(T object) {
-				Map<String,Container> item = (Map<String, Container>) object;
+			public Container execute(Map<String, Container> item) {
 				int articleId = item.get("code").asInteger();
 				String prop1 = item.get("prop1").asString();
 				String prop2 = item.get("prop2").asString();
