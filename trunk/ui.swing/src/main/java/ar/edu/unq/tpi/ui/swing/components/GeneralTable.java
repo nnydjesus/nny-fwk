@@ -63,14 +63,14 @@ public class GeneralTable<E> extends GeneralPanel {
 
         // ... y se a�ade todo al panel
         
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        autoAjuste();
+//        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         GroupLayout layout = new GroupLayout(this);
         layout.setHorizontalGroup(
         		layout.createSequentialGroup().addComponent(scroll));
         layout.setVerticalGroup(
         		layout.createParallelGroup().addComponent(scroll));
         this.setLayout(layout);
+        autoAjuste();
     }
 
     public JScrollPane getScroll() {
@@ -122,9 +122,10 @@ public class GeneralTable<E> extends GeneralPanel {
 			TableColumn col = colModel.getColumn(c);
 			int length = col.getHeaderValue().toString().length();
 			int maxWithByColum = maxWithByColum(c, length);
-			col.setMaxWidth(maxWithByColum + (4*this.tabla.getFont().getSize()));
+			int maxWidth = (int) (maxWithByColum + (2*this.tabla.getFont().getSize()));
+			col.setMaxWidth(maxWidth);
 			col.setPreferredWidth(maxWithByColum);
-			col.setMinWidth(maxWithByColum + (4*this.tabla.getFont().getSize()));
+			col.setMinWidth(maxWidth);
 		}
 	}
 	

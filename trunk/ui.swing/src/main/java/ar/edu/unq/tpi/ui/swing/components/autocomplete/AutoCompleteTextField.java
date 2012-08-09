@@ -450,9 +450,10 @@ public class AutoCompleteTextField extends KeyProcessingTextField {
         @Override
         protected void processMouseEvent(final MouseEvent me) {
             super.processMouseEvent(me);
-            if (me.getID() == MouseEvent.MOUSE_CLICKED) {
+            if (me.getID() == MouseEvent.MOUSE_PRESSED) {
             	AutoCompleteTextField.this.setValue(currentText);
                 this.selectText();
+                AutoCompleteTextField.this.fireActionPerformed();
             }
         }
 

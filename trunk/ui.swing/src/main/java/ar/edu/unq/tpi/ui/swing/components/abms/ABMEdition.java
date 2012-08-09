@@ -20,6 +20,8 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
 
     private WindowsEdition parent;
     
+    private boolean transactional = true;
+    
 
     public ABMEdition(T model,Home<T> home, WindowsEdition parent) {
         super(model);
@@ -95,16 +97,28 @@ public class ABMEdition<T extends IdentificablePersistentObject> extends PanelEd
 	}
 
 	public void onAccept() {
-		commit();
+		if(isTransactional()){
+			commit();
+		}
 		tengo = true;
 		ABMEdition.this.edicionAceptar();
 		tengo = false;
 	}
 
 	public void onCancel() {
-		rollback();
+		if(isTransactional()){
+			rollback();
+		}
 		ABMEdition.this.edicionCancelar();
 		setEditionModel(home.createExample());
+	}
+
+	public boolean isTransactional() {
+		return transactional;
+	}
+
+	public void setTransactional(boolean transactional) {
+		this.transactional = transactional;
 	}
 
 }

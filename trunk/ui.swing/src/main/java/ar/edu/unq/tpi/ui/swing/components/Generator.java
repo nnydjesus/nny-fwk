@@ -23,7 +23,7 @@ public class Generator {
 		final TableAdapter table = new TableAdapter();
 		table.setFont(parent.getFont());
 		parent.configureTableHeader(table.getTableHeader());
-		table.setBorder(new SubstanceBorder(new Insets(20, 20, 20, 20)));
+//		table.setBorder(new SubstanceBorder(new Insets(20, 20, 20, 20)));
 		
 		
 //		table.setAutoCreateRowSorter(true);
