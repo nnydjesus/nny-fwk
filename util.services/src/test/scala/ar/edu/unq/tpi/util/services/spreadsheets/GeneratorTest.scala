@@ -23,18 +23,11 @@ object GeneratorTest extends Generator{
 //		};
 //	}
   
-	  def f(obj:Any):Any = {
-		  	obj match{
-		  	  case item: Map[String, Container] => {
-		  	    
-		  	    var code:Integer = item.get("code").asInteger();
-		  	    var prop1:String = item.get("prop1").asString();
-		  	    var prop2:String = item.get("prop2").asString();
-		  	    Console.out.print("code: " + code + " prop1: " + prop1 + " prop2: " + prop2)
-		  	    
-		  	  }
-		  	  case _ => throw new ClassCastException
-		  	}
+	  def f(item:Map[String, Container]):Any = {
+	  	    var code:Integer = item.get("code").asInteger();
+	  	    var prop1:String = item.get("prop1").asString();
+	  	    var prop2:String = item.get("prop2").asString();
+	  	    Console.out.print("code: " + code + " prop1: " + prop1 + " prop2: " + prop2)
 	  }
 	
 
