@@ -1,7 +1,7 @@
 package ar.edu.unq.tpi.util.services.spreadsheets;
 
-public interface Function {
+public interface Function<T, J> {
 	
-	<T, J>  J  execute(T object);
+	J  execute(T object);
 
 }
