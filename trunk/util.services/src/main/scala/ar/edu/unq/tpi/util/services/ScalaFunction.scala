@@ -1,7 +1,7 @@
 package ar.edu.unq.tpi.util.services
 import ar.edu.unq.tpi.util.services.spreadsheets.Function
 
- class ScalaFunction(var method:(Any)  => Any) extends Function[Any, Any](){
+ class ScalaFunction[E, T](var method:(E)  => T) extends Function[E, T](){
 
-	override def execute(t:Any):Any =  method(t)
+	override def execute(e:E):T=  method(e)
 }
