@@ -1,40 +1,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>ar.edu.unq.tpi</groupId>
 	<artifactId>base</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nny-archetype-base</name>
 	<url>http://maven.apache.org</url>
-	<description>Base de para proyectos chicos</description>
+	<description>Base de persistencia para proyectos chicos</description>
 
 	<parent>
 		<groupId>ar.edu.unq.tpi</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
-	<scm>
-		<connection>scm:svn:https://nny-fwk.googlecode.com/svn/trunk/base/</connection>
-		<url>https://nny-fwk.googlecode.com/svn/trunk/</url>
-	</scm>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>ar.edu.unq.tpi</groupId>
+			<artifactId>util.commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ar.edu.unq.tpi</groupId>
+			<artifactId>commons.configuration</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ar.edu.unq.tpi</groupId>
+			<artifactId>util.services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
 			<version>3.5.6-Final</version>
 			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -44,33 +54,10 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.collections</groupId>
-			<artifactId>collections-generic</artifactId>
-			<version>4.01</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
 			<version>3.1.1.GA</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.luuuis</groupId>
-			<artifactId>jcalendar-tz</artifactId>
-			<version>1.3.3-4</version>
 		</dependency>
 
 		<dependency>
@@ -84,103 +71,7 @@
 			<artifactId>velocity</artifactId>
 			<version>1.5</version>
 		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.1_3</version>
-		</dependency>
-		<dependency>
-			<groupId>au.com.bytecode</groupId>
-			<artifactId>opencsv</artifactId>
-			<version>1.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.jgoodies</groupId>
-			<artifactId>binding</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.eclipse.jetty</groupId> -->
-		<!-- <artifactId>jetty-continuation</artifactId> -->
-		<!-- <version>7.2.2.v20101205</version> -->
-		<!-- <scope>compile</scope> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.mortbay.jetty</groupId> -->
-		<!-- <artifactId>jetty-blazeds</artifactId> -->
-		<!-- <version>3.2.0</version> -->
-		<!-- <scope>compile</scope> -->
-		<!-- </dependency> -->
-
-		<dependency>
-			<groupId>jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>3.5.1</version>
-			<!-- <exclusions> -->
-			<!-- <exclusion> -->
-			<!-- <groupId>commons-collections</groupId> -->
-			<!-- <artifactId>commons-collections</artifactId> -->
-			<!-- </exclusion> -->
-			<!-- <exclusion> -->
-			<!-- <groupId>commons-digester</groupId> -->
-			<!-- <artifactId>commons-digester</artifactId> -->
-			<!-- </exclusion> -->
-			<!-- <exclusion> -->
-			<!-- <groupId>commons-logging</groupId> -->
-			<!-- <artifactId>commons-logging</artifactId> -->
-			<!-- </exclusion> -->
-			<!-- </exclusions> -->
-		</dependency>
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>xwork</artifactId>
-			<version>2.0.3</version>
-		</dependency>
-
-		<!-- <dependency> <groupId>ar.com.mindset</groupId> <artifactId>flexy</artifactId> 
-			<version>7.0.6-SNAPSHOT</version> <scope>compile</scope> </dependency> -->
-		<dependency>
-			<groupId>org.codehaus.xfire</groupId>
-			<artifactId>xfire-java5</artifactId>
-			<version>1.2.6</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.safehaus.jug</groupId>
-			<artifactId>jug</artifactId>
-			<version>2.0.0</version>
-			<classifier>asl</classifier>
-			<scope>compile</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>jfig</groupId>
-			<artifactId>jfig</artifactId>
-			<version>1.5.2</version>
-		</dependency>
 	</dependencies>
-
 	<repositories>
 		<repository>
 			<id>jboss</id>
@@ -193,7 +84,6 @@
 			</releases>
 		</repository>
 	</repositories>
-
 	<!-- <build> -->
 	<!-- <pluginManagement> -->
 	<!-- <plugins> -->
@@ -203,10 +93,7 @@
 	<!-- <version>2.3.2</version> -->
 	<!-- <configuration> -->
 	<!-- <compilerVersion>1.6</compilerVersion> -->
-	<!-- <source>1.6</source> -->
-	<!-- necessary to enable assertions -->
 	<!-- <target>1.6</target> -->
-	<!-- necessary to enable assertions -->
 	<!-- <debug>true</debug> -->
 	<!-- <showDeprecation>true</showDeprecation> -->
 	<!-- <showWarnings>true</showWarnings> -->
@@ -233,7 +120,7 @@
 	<!-- <plugin> -->
 	<!-- <groupId>org.mortbay.jetty</groupId> -->
 	<!-- <artifactId>jetty-maven-plugin</artifactId> -->
-	<!-- <version>7.2.2.v20101205</version> -->
+	<!-- <version>7.3.0.v20110203</version> -->
 	<!-- <configuration> -->
 	<!-- <scanIntervalSeconds>3</scanIntervalSeconds> -->
 	<!-- <webAppConfig> -->
