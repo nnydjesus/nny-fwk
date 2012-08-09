@@ -75,8 +75,8 @@ public class SearchPanel<T extends PersistentObject> extends
 		super(model);
 		this.parent = parent;
 		this.setHome(home);
-		this.search();
 		setTable(this.createTable(home.createExample()));
+		this.search();
 		addMyButtons();
 		this.addActions();
 		panelPrint = new JPanel();
@@ -180,6 +180,7 @@ public class SearchPanel<T extends PersistentObject> extends
 	public void clear() {
 		getResult().removeAll(getResult());
 		this.setModel(parent.getDefaultModel());
+		this.table.autoAjuste();
 		updateTotals();
 		SwingUtilities.updateComponentTreeUI(this);
 	}
@@ -187,6 +188,7 @@ public class SearchPanel<T extends PersistentObject> extends
 	public void search() {
 		getResult().removeAll(getResult());
 		getResult().addAll(getHome().searchByExample(this.getModel()));
+		this.table.autoAjuste();
 		updateTotals();
 		SwingUtilities.updateComponentTreeUI(this);
 	}
