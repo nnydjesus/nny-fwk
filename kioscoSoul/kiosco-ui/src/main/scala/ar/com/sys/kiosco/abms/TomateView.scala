@@ -1,9 +1,10 @@
 package ar.com.sys.kiosco.abms
 
-import	scala.swing._
+import scala.swing._
+
 import javax.swing.JTextField
 
-object TomateView extends SimpleGUIApplication {
+object TomateView extends SimpleSwingApplication {
     
   
 	def top = new MainFrame {

@@ -5,11 +5,16 @@ import scala.swing.Component
 import javax.swing.JComponent
 import java.awt.Container
 
-trait FontSize extends Component {
-  font = new Font("Arial", Font.PLAIN, 24)
+
+object TableFont{
+  val headerFont = new Font("Arial", Font.BOLD, 18)
+  val cellFont = new Font("Arial", Font.BOLD, 16)
 }
 
+trait FontSize extends Component {
+  font = new Font("Arial", Font.PLAIN, 18)
+}
 
 trait JFontSize extends Container {
-  setFont( new Font("Arial", Font.PLAIN, 24))
+  setFont( new Font("Arial", Font.PLAIN, 18))
 }

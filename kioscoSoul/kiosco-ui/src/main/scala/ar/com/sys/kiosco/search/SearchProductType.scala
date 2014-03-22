@@ -1,6 +1,5 @@
 package ar.com.sys.kiosco.search
 import java.awt.Font
-
 import ar.com.sys.kiosco.abms.ABMProductType
 import ar.edu.unq.tpi.base.bean.ProductType
 import ar.edu.unq.tpi.base.bean.ProductAtributes
@@ -9,6 +8,7 @@ import ar.edu.unq.tpi.base.KioscoApplication
 import ar.edu.unq.tpi.ui.swing.components.search.GeneralFrame
 import ar.edu.unq.tpi.ui.swing.components.search.SearchPanel
 import javax.swing.table.JTableHeader
+import ar.com.sys.kiosco.util.TableFont
 
 class SearchProductType(any: Any) extends GeneralFrame[ProductType]("ProductType", classOf[ProductType]) {
 
@@ -31,10 +31,10 @@ class SearchProductType(any: Any) extends GeneralFrame[ProductType]("ProductType
     return classOf[ABMProductType];
   }
 
-  override def getFont() = new Font("Arial", Font.PLAIN, 24)
+  override def getFont() = TableFont.cellFont
 
   override def conconfigureTableHeader(header: JTableHeader) {
-    header.setFont(new Font("Arial", Font.BOLD, 22))
+    header.setFont(TableFont.headerFont)
   }
 
 }

@@ -24,6 +24,7 @@ import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JPanel
 import ar.edu.unq.tpi.util.services.jasper.Report
+import ar.com.sys.kiosco.util.TableFont
 
 class GananciaPerTypeUI(any: Any) extends CenteredJFrame with TableSelection[GananciaPerType] {
 
@@ -108,10 +109,10 @@ class GananciaPerTypeUI(any: Any) extends CenteredJFrame with TableSelection[Gan
 
   }
 
-  override def getFont() = new Font("Arial", Font.BOLD, 24)
+  override def getFont() = TableFont.cellFont
 
   override def configureTableHeader(header: JTableHeader) = {
-    header.setFont(new Font("Arial", Font.BOLD, 22))
+    header.setFont(TableFont.headerFont)
     header.setForeground(Color.BLUE)
   }
 

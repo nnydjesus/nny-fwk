@@ -3,7 +3,6 @@ import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.Font
 import java.awt.Toolkit
-
 import ar.com.sys.kiosco.abms.ABMProduct
 import ar.com.sys.kiosco.util.AutoCompleteListTextField
 import ar.edu.unq.tpi.base.bean.Product
@@ -14,6 +13,7 @@ import ar.edu.unq.tpi.base.KioscoApplication
 import ar.edu.unq.tpi.ui.swing.components.search.GeneralFrame
 import ar.edu.unq.tpi.ui.swing.components.search.SearchPanel
 import javax.swing.table.JTableHeader
+import ar.com.sys.kiosco.util.TableFont
 
 class SearchProduct(any: Any) extends GeneralFrame[Product]("Product", classOf[Product]) {
 
@@ -49,10 +49,10 @@ class SearchProduct(any: Any) extends GeneralFrame[Product]("Product", classOf[P
     return classOf[ABMProduct];
   }
 
-  override def getFont() = new Font("Arial", Font.PLAIN, 24)
+  override def getFont() = TableFont.cellFont
 
   override def conconfigureTableHeader(header: JTableHeader) {
-    header.setFont(new Font("Arial", Font.BOLD, 22))
+    header.setFont(TableFont.headerFont)
   }
 
 }

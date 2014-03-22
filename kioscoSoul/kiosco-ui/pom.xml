@@ -16,7 +16,7 @@
 	<properties>
 		<!-- <targetJdkVersion>1.7</targetJdkVersion> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<scala.version>2.9.1</scala.version>
+		<scala.version>2.10.2</scala.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -52,18 +52,6 @@
 			<artifactId>scala-swing</artifactId>
 			<version>${scala.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.scalatest</groupId>
-			<artifactId>scalatest_2.9.1</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.scala-tools.testing</groupId>
-			<artifactId>specs_2.9.1</artifactId>
-			<version>1.6.9</version>
-		</dependency>
-
 
 	</dependencies>
 
