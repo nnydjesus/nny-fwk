@@ -12,6 +12,7 @@ import ar.edu.unq.tpi.util.services.spreadsheets.Generator
 import ar.edu.unq.tpi.util.services.spreadsheets.SSConnectorRefreshStrategy
 import ar.edu.unq.tpi.util.services.ScalaFunction
 import ar.edu.unq.tpi.util.services.spreadsheets.SSConnectorExcelStrategy
+import ar.edu.unq.tpi.util.services.spreadsheets.SSConnectorCacheStrategy
 
 class ProductTypeGenerator extends InitialDataGenerator[ProductType] {
 
@@ -19,8 +20,8 @@ class ProductTypeGenerator extends InitialDataGenerator[ProductType] {
 
   @DataGeneratorMethod
   def generate() = {
-	  new Generator().map[Any](new ScalaFunction(makeProductType), new SSConnectorRefreshStrategy("nny.fwk@gmail.com", "sarasaza"), "Productos", "Tipos");
-//    new Generator().map[Any](new ScalaFunction(makeProductType), new SSConnectorExcelStrategy(), "Productos", "Tipos");
+//	  new Generator().map[Any](new ScalaFunction(makeProductType), new SSConnectorRefreshStrategy("nny.fwk@gmail.com", "sarasaza"), "Productos", "Tipos");
+    new Generator().map[Any](new ScalaFunction(makeProductType), new SSConnectorCacheStrategy(), "Productos", "Tipos");
   }
   
     def makeProductType(obj: Any): Any = {

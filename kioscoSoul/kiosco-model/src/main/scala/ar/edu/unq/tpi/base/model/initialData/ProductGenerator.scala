@@ -17,6 +17,7 @@ import ar.edu.unq.tpi.util.services.ScalaFunction
 import java.util.Date
 import java.text.SimpleDateFormat
 import ar.edu.unq.tpi.util.services.spreadsheets.SSConnectorExcelStrategy
+import ar.edu.unq.tpi.util.services.spreadsheets.SSConnectorCacheStrategy
 
 class ProductGenerator extends InitialDataGenerator[Product] {
 
@@ -25,8 +26,8 @@ class ProductGenerator extends InitialDataGenerator[Product] {
 
   @DataGeneratorMethod
   def generate() = {
-    new Generator().map[Any](new ScalaFunction(makeProduct), new SSConnectorRefreshStrategy("nny.fwk@gmail.com", "sarasaza"), "Productos");
-//    new Generator().map[Any](new ScalaFunction(makeProduct), new SSConnectorExcelStrategy(), "Productos")
+//    new Generator().map[Any](new ScalaFunction(makeProduct), new SSConnectorRefreshStrategy("nny.fwk@gmail.com", "sarasaza"), "Productos");
+    new Generator().map[Any](new ScalaFunction(makeProduct), new SSConnectorCacheStrategy(), "Productos")
   }
 
   def makeProduct(obj: Any): Any = {
