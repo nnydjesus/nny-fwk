@@ -47,7 +47,6 @@ class ButtonBox(var kiosco: KioscoAppUI, any:Any) extends BoxPanel(Orientation.V
 	
 trait ButtonSize extends Button{
   var dimension = new Dimension(250, 70)
-  this.size = dimension
   this.minimumSize = dimension
   this.preferredSize = dimension
   this.maximumSize = dimension

@@ -1,50 +1,51 @@
 package ar.com.sys.kiosco.app
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
-import java.awt.event.MouseEvent
+
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.GridLayout
 import java.awt.Toolkit
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
+import java.awt.event.MouseEvent
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import scala.collection.JavaConversions._
+
 import scala.swing.BorderPanel
 import scala.swing.BoxPanel
 import scala.swing.FormattedTextField
 import scala.swing.Label
 import scala.swing.Orientation
-import com.jgoodies.binding.adapter.Bindings
-import com.jgoodies.binding.beans.BeanAdapter
+
 import ar.com.sys.kiosco.util.AutoCompleteListTextField
+import ar.com.sys.kiosco.util.JFontSize
+import ar.com.sys.kiosco.util.MethodListener
 import ar.com.sys.kiosco.util.NumberValidationFormat
+import ar.com.sys.kiosco.util.TableFont
 import ar.com.sys.kiosco.util.TotalSale
+import ar.edu.unq.tpi.base.KioscoApplication
+import ar.edu.unq.tpi.base.bean.Product
 import ar.edu.unq.tpi.base.bean.ProductSold
 import ar.edu.unq.tpi.base.bean.Sale
 import ar.edu.unq.tpi.base.persistence.transaction.UseCaseManager
 import ar.edu.unq.tpi.base.search.Home
-import ar.edu.unq.tpi.base.KioscoApplication
-import ar.edu.unq.tpi.ui.swing.components.abms.ABMEdition
-import ar.edu.unq.tpi.ui.swing.components.abms.ABMFrame
-import ar.edu.unq.tpi.ui.swing.components.autocomplete.AutoCompleteTextField
+import ar.edu.unq.tpi.base.utils.Path
 import ar.edu.unq.tpi.ui.swing.components.FormBuilder
 import ar.edu.unq.tpi.ui.swing.components.GeneralTable
 import ar.edu.unq.tpi.ui.swing.components.Generator
 import ar.edu.unq.tpi.ui.swing.components.TableSelection
-import javax.swing.table.JTableHeader
+import ar.edu.unq.tpi.ui.swing.components.abms.ABMEdition
+import ar.edu.unq.tpi.ui.swing.components.abms.ABMFrame
+import ar.edu.unq.tpi.ui.swing.components.autocomplete.AutoCompleteTextField
+import ar.edu.unq.tpi.ui.swing.components.search.TopPanel
+import ar.edu.unq.tpi.util.commons.exeption.UserException
+import javax.swing.ImageIcon
+import javax.swing.JButton
 import javax.swing.JFormattedTextField
 import javax.swing.JPanel
-import ar.edu.unq.tpi.base.bean.Product
-import java.awt.event.KeyAdapter
-import java.awt.event.KeyEvent
-import ar.edu.unq.tpi.ui.swing.components.search.TopPanel
-import ar.com.sys.kiosco.util.MethodListener
-import ar.edu.unq.tpi.util.commons.exeption.UserException
-import javax.swing.JButton
-import javax.swing.ImageIcon
-import ar.edu.unq.tpi.base.utils.Path
-import ar.com.sys.kiosco.util.JFontSize
+import javax.swing.table.JTableHeader
 
 class SalesUI(model: Sale) extends ABMFrame[Sale](model, null, true) with TableSelection[Sale] {
 
@@ -67,11 +68,9 @@ class SalesUI(model: Sale) extends ABMFrame[Sale](model, null, true) with TableS
     var format = new DecimalFormat("#.#")
     format.setMaximumFractionDigits(2)
     totalText = new FormattedTextField(format) {
-      size = new Dimension(300, 100)
-      minimumSize = new Dimension(300, 100)
-      preferredSize = new Dimension(300, 100)
+      preferredSize = new Dimension(300, 50)
       editable = false;
-      font = new Font("Arial", Font.BOLD, 64)
+      font = new Font("Arial", Font.BOLD, 70)
       background = Color.BLACK
       foreground = Color.GREEN
       text = "0";
@@ -81,13 +80,12 @@ class SalesUI(model: Sale) extends ABMFrame[Sale](model, null, true) with TableS
         var totalLabel = new Label("Total: ") {
           font = new Font("Arial", Font.BOLD, 36)
         }
-
         peer.add(totalLabel.peer)
         peer.add(totalText.peer)
       }
 
       this.add(panel, BorderPanel.Position.West)
-      this.size = new Dimension(500, 300)
+      this.preferredSize = new Dimension(500, 300)
     }
     getEdicion().add(totalPanel.peer)
     getEdicion().getBotonAceptar().getActionListeners().foreach(a => getEdicion().getBotonAceptar().removeActionListener(a))
@@ -223,10 +221,10 @@ class SalesUI(model: Sale) extends ABMFrame[Sale](model, null, true) with TableS
   def updateTotalText() = totalText.peer.setValue(getEdicion().getModel().total)
   def updateFocus() = productText.requestFocusInWindow()
 
-  override def getFont() = new Font("Arial", Font.BOLD, 24)
+  override def getFont() = TableFont.cellFont
   override def selectedTable(event: MouseEvent) = {}
   override def configureTableHeader(header: JTableHeader) = {
-    header.setFont(new Font("Arial", Font.BOLD, 22))
+    header.setFont(TableFont.headerFont)
     header.setForeground(Color.BLUE)
   }
 

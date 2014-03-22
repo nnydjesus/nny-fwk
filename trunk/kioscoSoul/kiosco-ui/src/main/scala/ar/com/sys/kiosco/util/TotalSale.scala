@@ -73,7 +73,6 @@ class TotalSale(var sale: Double, var salesUI: SalesUI) extends SimpleSwingAppli
     contents = new BoxPanel(Orientation.Horizontal) {
       contents += new BoxPanel(Orientation.Vertical) {
         var di = new Dimension(305, 400)
-        size = di
         preferredSize = di
         minimumSize = di
         maximumSize = di
@@ -163,7 +162,6 @@ trait LabelConfiguration extends ComponentSize {
 
 trait ComponentSize extends Component {
   var dimension = new Dimension(300, 50)
-  this.size = dimension
   this.minimumSize = dimension
   this.preferredSize = dimension
   this.maximumSize = dimension

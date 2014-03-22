@@ -18,26 +18,24 @@ import javax.swing.SwingUtilities
 import javax.swing.UIManager
 import javax.swing.JOptionPane
 import ar.edu.unq.tpi.base.KioscoApplication
+import java.text.DecimalFormat
 
 class KioscoAppUI(preloader: Preloader) extends FrameLook with Runnable {
   var contains: BorderPanel = null
   
   var buttonBox : ButtonBox = new ButtonBox(this)
+  val doubleFormat = new DecimalFormat("#.##")
   
   def this() = {
     this(null)
     this.setJMenuBar(new KioscoMenu(this));
-    contains = new BorderPanel{
-     add(buttonBox, Position.West) 
-    }
-    
+    contains = new BorderPanel{}
+    contains.peer.add(buttonBox.peer, Position.West.toString) 
     this.add(contains.peer)
-//    this.setLoader(new Preloader(this, "Kiosco"))
+    this.setLoader(new Preloader(this, "Kiosco"))
     this.fullScreen();
     this.setVisible(false)
-
     this.addActions()
-
   }
   
   def addActions() = {
@@ -51,7 +49,6 @@ class KioscoAppUI(preloader: Preloader) extends FrameLook with Runnable {
   override def run() = {
     UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
     SwingUtilities.updateComponentTreeUI(this)
-//    Thread.sleep(1000 * 10)
     this.setVisible(true)
     this.closeLoader()
   }
@@ -70,7 +67,7 @@ class KioscoAppUI(preloader: Preloader) extends FrameLook with Runnable {
     		"h1 {color:red; font-size: 20; }" +
     		"</style> </head><body>" +
     		"Total de Dinero <h1>"+
-    		KioscoApplication.kiosco.productHome.getMoneyInvestedProducts()+"<h1>" +
+    		doubleFormat.format(KioscoApplication.kiosco.productHome.getMoneyInvestedProducts())+"<h1>" +
     		"</body></html>"
     		
    		JOptionPane.showMessageDialog(this, message , "Dinero Total Invetido" , JOptionPane.INFORMATION_MESSAGE);
